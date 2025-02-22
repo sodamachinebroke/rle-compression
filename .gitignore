@@ -2,5 +2,4 @@ cmake-build-debug
 assets/compressed
 assets/generated*
 *.exe
-.idea
 LICENSE
