@@ -1,7 +1,7 @@
 cmake-build-debug
-assets/compressed
-assets/generated*
+/assets/compressed
+/assets/generated*
 *.exe
 LICENSE
 .idea
-backup
+/backup/*
