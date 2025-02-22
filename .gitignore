@@ -3,3 +3,4 @@ assets/compressed
 assets/generated*
 *.exe
 LICENSE
+.idea
