@@ -8,8 +8,6 @@
 #include <utility>
 #include <vector>
 
-namespace fs = std::filesystem;
-
 std::vector<std::pair<uint8_t, uint8_t> > rle_compress(const std::vector<uint8_t> &data) {
     if (data.empty()) throw std::runtime_error("Data is empty");
 
@@ -41,7 +39,7 @@ std::vector<uint8_t> rle_decompress(const std::vector<std::pair<uint8_t, uint8_t
     return decompressed;
 }
 
-void generate_random_file(const fs::path &filename, size_t size = 1000) {
+void generate_random_file(const std::filesystem::path &filename, size_t size = 1000) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<uint8_t> dist(0, 255);
@@ -55,7 +53,8 @@ void generate_random_file(const fs::path &filename, size_t size = 1000) {
     outfile.write(reinterpret_cast<const char *>(sample_data.data()), sample_data.size());
 }
 
-void write_compressed(const fs::path &filename, const std::vector<std::pair<uint8_t, uint8_t> > &compressed) {
+void write_compressed(const std::filesystem::path &filename,
+                      const std::vector<std::pair<uint8_t, uint8_t> > &compressed) {
     std::ofstream outfile(filename, std::ios::binary | std::ios::trunc);
     if (!outfile.is_open()) throw std::runtime_error("Unable to open file for writing: " + filename.string());
     for (const auto &[byte, count]: compressed) {
@@ -65,8 +64,8 @@ void write_compressed(const fs::path &filename, const std::vector<std::pair<uint
 }
 
 int main() {
-    fs::path input_filename = "./assets/input3.bin";
-    fs::path compressed_filename = "./assets/compressed/output3.bin";
+    std::filesystem::path input_filename = "./assets/input3.bin";
+    std::filesystem::path compressed_filename = "./assets/compressed/output3.bin";
 
     //generate_random_file("./assets/generated_input.bin");
 
